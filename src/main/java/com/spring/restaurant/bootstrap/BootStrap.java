@@ -13,17 +13,20 @@ import javax.annotation.PostConstruct;
 public class BootStrap {
     @Autowired
     private UserRepo userRepo;
+
     @Autowired
     private RoleRepo roleRepo;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @PostConstruct
     private void postConstructor() {
         if (!isUsernameExist("Gokul")) {
             UserDetails admin = new UserDetails();
             admin.setUsername("Gokul");
             admin.setPassword(passwordEncoder.encode("1234"));
-           admin.setRoleDetails(roleRepo.findById(2).get());
+            admin.setRoleDetails(roleRepo.findById(2).get());
             userRepo.save(admin);
         }
 

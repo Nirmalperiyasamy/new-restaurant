@@ -27,7 +27,7 @@
     <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
       <h1 class = "text-center"> Create New Menu </h1>
       <div class = "card-body">
-        <form th:action="@{/api/manager/menu}" th:object = "${menu}" method="post">
+        <form th:action="@{/manager/menu}" th:object = "${menu}" method="post">
           <div class ="form-group">
             <label> Food name </label>
             <input
@@ -36,6 +36,7 @@
                     th:field = "*{food}"
                     class = "form-control"
                     placeholder="Enter Food name"
+                    required
             />
           </div>
 
@@ -47,6 +48,7 @@
                     th:field = "*{price}"
                     class = "form-control"
                     placeholder="Enter Price "
+                    required
             />
           </div>
 

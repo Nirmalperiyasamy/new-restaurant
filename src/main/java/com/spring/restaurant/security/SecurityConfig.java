@@ -5,7 +5,9 @@ import com.spring.restaurant.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,16 +34,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
-    protected void configure(AuthenticationManagerBuilder builder) {
+
+    protected void configure(AuthenticationManagerBuilder builder) throws Exception {
         builder.authenticationProvider(authProvider());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/employee/add").permitAll()
-                .antMatchers("/api/manager/**").hasAuthority(Role.MANAGER.name())
-                .antMatchers("/api/employee/**").hasAuthority(Role.EMPLOYEE.name())
+                .antMatchers("/employee/add").permitAll()
+                .antMatchers("/manager/**").hasAuthority(Role.MANAGER.name())
+                .antMatchers("/employee/**").hasAuthority(Role.EMPLOYEE.name())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

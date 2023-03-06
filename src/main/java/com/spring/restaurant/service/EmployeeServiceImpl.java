@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,7 +44,7 @@ public class EmployeeServiceImpl implements UserDetailsService {
 
     @Override
     public org.springframework.security.core.userdetails.UserDetails
-    loadUserByUsername(String username) throws UsernameNotFoundException {
+    loadUserByUsername(String username) {
         UserDetails details = userRepo.findByusername(username);
         List<GrantedAuthority> authorities = List.of((GrantedAuthority) () -> details.getRoleDetails().getRole().name());
         return new User(details.getUsername(), details.getPassword(), authorities);

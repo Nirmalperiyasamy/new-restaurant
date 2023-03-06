@@ -17,21 +17,10 @@ import java.util.stream.Collectors;
 @Slf4j
 @ControllerAdvice
 public class GlobalException {
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public String exception(Model model, MethodArgumentNotValidException exception) {
-        model.addAttribute("errorMessage", exception.getMessage());
-        return "employee-register";
-    }
-
-    @ExceptionHandler(value = CustomException.class)
-    public String exception(Model model, CustomException exception) {
-        model.addAttribute("errorMessage", exception.getMessage());
-        return "forward:/api/employee/add";
-    }
 
     @ExceptionHandler(value = BindException.class)
     public String exception(Model model, BindException exception) {
-        model.addAttribute("errorMessage", exception.getMessage());
+        model.addAttribute("errorMessage", exception.getFieldError().getDefaultMessage());
         return "employee-register";
     }
 }

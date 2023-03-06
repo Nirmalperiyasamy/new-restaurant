@@ -21,9 +21,9 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority authority : authorities) {
             if (authority.getAuthority().equals(Role.MANAGER.name())) {
-                response.sendRedirect("/api/manager/menu");
+                response.sendRedirect("/manager/menu");
             } else if (authority.getAuthority().equals(Role.EMPLOYEE.name())) {
-                response.sendRedirect("/api/employee/menu");
+                response.sendRedirect("/employee/menu");
             }
         }
     }

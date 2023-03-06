@@ -1,6 +1,5 @@
 package com.spring.restaurant.controller;
 
-import com.spring.restaurant.dao.MenuDetails;
 import com.spring.restaurant.dto.MenuDto;
 import com.spring.restaurant.service.ManagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import javax.validation.Valid;
 
 import java.util.List;
 
-import static com.spring.restaurant.constants.Constants.*;
+import static com.spring.restaurant.utils.Constants.*;
 
 @Controller
 @RequestMapping(MANAGER)
@@ -33,7 +32,7 @@ public class ManagerController {
         return "manager-menulist";
     }
 
-    @GetMapping(ADDMENU)
+    @GetMapping(ADD_MENU)
     public String getAll(Model model) {
         MenuDto dto = new MenuDto();
         model.addAttribute("menu", dto);
@@ -42,19 +41,22 @@ public class ManagerController {
 
     @PostMapping(MENU)
     public String menu(@Valid @ModelAttribute MenuDto dto) {
+        System.out.println(dto);
         managerService.addMenu(dto);
         return "redirect:menu";
     }
 
 
-    @GetMapping(EDITMENU)
+    @GetMapping(EDIT_MENU)
     public String editMenu(@PathVariable int id, Model model) {
-        model.addAttribute("menu", managerService.getById(id));
+        System.out.println("edit..............");
+        model.addAttribute("menus", managerService.getById(id));
         return "edit-menu";
     }
 
-    @PostMapping(UPDATEMENU)
-    public String updateMenu(@PathVariable int id, @ModelAttribute("menu") MenuDto dto, Model model) {
+    @PostMapping(UPDATE_MENU)
+    public String updateMenu(@PathVariable int id, @ModelAttribute("menus") MenuDto dto, Model model) {
+        System.out.println("please..........");
         MenuDto existMenu = managerService.getById(id);
         existMenu.setId(id);
         existMenu.setFood(dto.getFood());
@@ -63,7 +65,7 @@ public class ManagerController {
         return "redirect:/api/manager/menu";
     }
 
-    @GetMapping(DELETEMENU)
+    @GetMapping(DELETE_MENU)
     public String deleteMenu(@PathVariable int id) {
         managerService.deleteById(id);
         return "redirect:/api/manager/menu";

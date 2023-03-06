@@ -1,7 +1,9 @@
 package com.spring.restaurant.service;
 
+import com.spring.restaurant.dao.EmployeeMenu;
 import com.spring.restaurant.dao.MenuDetails;
 import com.spring.restaurant.dto.MenuDto;
+import com.spring.restaurant.repository.EmployeeMenuRepo;
 import com.spring.restaurant.repository.MenuRepo;
 import com.spring.restaurant.repository.UserRepo;
 import org.springframework.beans.BeanUtils;
@@ -15,12 +17,18 @@ import java.util.List;
 public class ManagerServiceImpl {
     @Autowired
     private MenuRepo menuRepo;
+    @Autowired
+    private EmployeeMenuRepo employeeMenuRepo;
 
     public MenuDto addMenu(MenuDto dto) {
         MenuDetails details = new MenuDetails();
         BeanUtils.copyProperties(dto, details);
         details = menuRepo.save(details);
         BeanUtils.copyProperties(details, dto);
+
+        EmployeeMenu employeeMenu = new EmployeeMenu();
+        BeanUtils.copyProperties(dto, employeeMenu);
+        employeeMenuRepo.save(employeeMenu);
         return dto;
     }
 

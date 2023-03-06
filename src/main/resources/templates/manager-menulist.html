@@ -28,8 +28,8 @@
     <tr th:each="menu : ${menus}" scope="row">
         <td th:text="${menu.food}"></td>
         <td th:text="${menu.price}"></td>
-        <td><a th:href="@{/api/manager/edit/{id}(id=${menu.id})}" class="btn btn-primary">update</a> </td>
-        <td><a th:href="@{/api/manager/menu/delete/{id}(id=${menu.id})}" class="btn btn-primary">Delete</a> </td>
+        <td><a th:href="@{/api/manager/edit/{id}(id=${menu.id})}" class="btn btn-primary">update</a></td>
+        <td><a th:href="@{/api/manager/menu/delete/{id}(id=${menu.id})}" class="btn btn-primary">Delete</a></td>
     </tr>
     </tbody>
 </table>
