@@ -15,6 +15,7 @@ public class MenuDto {
 
     @NotNull(message = "Food not empty")
     private String food;
+
     @NotNull(message = "Enter price")
     private int price;
 

@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
+
 @Getter
 @Setter
 public class ErrorResponse {

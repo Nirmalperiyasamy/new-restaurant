@@ -1,7 +1,7 @@
 package com.spring.restaurant.controller;
 
 import com.spring.restaurant.dto.MenuDto;
-import com.spring.restaurant.service.ManagerServiceImpl;
+import com.spring.restaurant.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import static com.spring.restaurant.utils.Constants.*;
 @RequestMapping(MANAGER)
 public class ManagerController {
     @Autowired
-    private ManagerServiceImpl managerService;
+    private ManagerService managerService;
 
     @RequestMapping(PING)
     public ResponseEntity<?> ping() {
@@ -49,14 +49,12 @@ public class ManagerController {
 
     @GetMapping(EDIT_MENU)
     public String editMenu(@PathVariable int id, Model model) {
-        System.out.println("edit..............");
         model.addAttribute("menus", managerService.getById(id));
         return "edit-menu";
     }
 
     @PostMapping(UPDATE_MENU)
     public String updateMenu(@PathVariable int id, @ModelAttribute("menus") MenuDto dto, Model model) {
-        System.out.println("please..........");
         MenuDto existMenu = managerService.getById(id);
         existMenu.setId(id);
         existMenu.setFood(dto.getFood());

@@ -15,6 +15,6 @@ public class EmployeeMenu {
     private int id;
 
     private String food;
-    private int price ;
-    private int quantity ;
+    private int price;
+    private int quantity;
 }

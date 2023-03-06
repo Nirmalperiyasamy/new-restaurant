@@ -5,7 +5,6 @@ import com.spring.restaurant.dao.MenuDetails;
 import com.spring.restaurant.dto.MenuDto;
 import com.spring.restaurant.repository.EmployeeMenuRepo;
 import com.spring.restaurant.repository.MenuRepo;
-import com.spring.restaurant.repository.UserRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ManagerServiceImpl {
+public class ManagerService {
     @Autowired
     private MenuRepo menuRepo;
     @Autowired

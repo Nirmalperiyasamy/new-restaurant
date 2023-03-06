@@ -1,13 +1,10 @@
 package com.spring.restaurant.controller;
 
-import com.spring.restaurant.dao.EmployeeMenu;
-import com.spring.restaurant.dto.EmployeeMenuDto;
-import com.spring.restaurant.dto.MenuDto;
 import com.spring.restaurant.dto.UserDto;
 import com.spring.restaurant.repository.EmployeeMenuRepo;
-import com.spring.restaurant.service.EmployeeMenuImpl;
+import com.spring.restaurant.service.EmployeeMenu;
 import com.spring.restaurant.service.EmployeeServiceImpl;
-import com.spring.restaurant.service.ManagerServiceImpl;
+import com.spring.restaurant.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.spring.restaurant.utils.Constants.*;
@@ -27,9 +23,9 @@ public class EmployeeController {
     @Autowired
     private EmployeeServiceImpl employeeService;
     @Autowired
-    private ManagerServiceImpl managerService;
+    private ManagerService managerService;
     @Autowired
-    private EmployeeMenuImpl employeeMenu;
+    private EmployeeMenu employeeMenu;
     @Autowired
     private EmployeeMenuRepo employeeMenuRepo;
 
@@ -54,7 +50,7 @@ public class EmployeeController {
 
     @GetMapping(MENU)
     public String allMenu(Model model) {
-        List<EmployeeMenu> menu = employeeMenu.getAll();
+        List<com.spring.restaurant.dao.EmployeeMenu> menu = employeeMenu.getAll();
         model.addAttribute("menus", menu);
         return "employee-menulist";
     }
